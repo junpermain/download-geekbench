@@ -1,0 +1,39 @@
+name: Download Geekbench 6.7.0 Linux
+
+on:
+  # 1. 手动触发（你要跑的时候点一下）
+  workflow_dispatch:
+
+jobs:
+  download-and-package:
+    runs-on: ubuntu-latest  # Linux 环境
+
+    steps:
+      - name: Checkout repo（可选）
+        uses: actions/checkout@v4
+
+      # 2. 下载 Geekbench-6.7.0-Linux.tar.gz
+      - name: Download Geekbench 6.7.0
+        run: |
+          wget -v https://cdn.geekbench.com/Geekbench-6.7.0-Linux.tar.gz \
+            -O Geekbench-6.7.0-Linux.tar.gz
+          
+          # 验证文件大小/是否下载成功
+          ls -lh
+          file Geekbench-6.7.0-Linux.tar.gz
+
+      # 3. 解压（可选，看你要不要里面文件）
+      - name: Extract archive
+        run: |
+          tar -zxvf Geekbench-6.7.0-Linux.tar.gz
+          ls -la
+
+      # 4. 上传为 GitHub Artifact（你后面能下载）
+      - name: Upload Geekbench as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: geekbench-6.7.0-linux
+          path: |
+            Geekbench-6.7.0-Linux.tar.gz
+            Geekbench-6.7.0-Linux/  # 解压后的目录也一起传
+          retention-days: 7  # 保存7天
