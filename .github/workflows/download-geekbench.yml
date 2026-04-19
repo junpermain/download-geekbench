@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout repo（可选）
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # 2. 下载 Geekbench-6.7.0-Linux.tar.gz
       - name: Download Geekbench 6.7.0
