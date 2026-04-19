@@ -30,7 +30,7 @@ jobs:
 
       # 4. 上传为 GitHub Artifact（你后面能下载）
       - name: Upload Geekbench as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: geekbench-6.7.0-linux
           path: |
